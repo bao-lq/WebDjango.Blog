@@ -1,0 +1,22 @@
+{% extends "pages/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Lession 5 - Static File & Bootstrap
+{% endblock %}
+
+{% block content %}
+
+	<a href="{% url 'home' %}" target="_blank"> Home </a> | <a href="{% url 'about' %}" target="_blank"> About</a>
+	<style>
+		#content {
+			background-image: url("{% static 'images/The-Universe.jpeg' %}");
+			background-repeat: no-repeat;
+			background-size: cover;
+			min-height: 300px;
+		}
+	</style>
+
+	<div id="content"></div>
+{% endblock %}

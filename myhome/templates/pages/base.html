@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'js/bootstrap.min.js' %}">
+    <link rel="icon" type="img/png" href="{% static 'images/icon-home.png' %}">
+
+    <title>{% block title%}{% endblock %}</title>
+
+</head>
+<body>
+    <style>
+        body {
+            height: 100%;
+        }
+    </style>
+    <div class="container-fluid" style="min-height: 95%;">
+        <div class="row">
+            <div class="col-sm-2">
+                <center><img src="{% static 'images/Django-icon.png' %}" class="reponsive-img" alt="img" style="max-height: 100px;"></center>
+            </div>
+
+            <div class="col-sm-8">
+                <center><h2>Welcome to Web Django</h2></center>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="bs-sliderbar" style="background-color: #ffffff;">
+                    <ul class="nav flex-column">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="{% url 'info' %}">Information</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'blog' %}">My Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container-fluid" style="min-height: 5%;">
+            <hr>
+            <a href="/">Facebook </a>
+            <a href="/"> | Email </a>
+            <a href="/"> | Website </a>
+            <p>Copyright @ 2023 baolq. All Rights Reversed.</p>
+        </div>
+    </footer>
+</body>
+</html>
