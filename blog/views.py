@@ -8,9 +8,10 @@ def list(request):
     return render(request, 'blogs/blog.html', Data)
 
 def post(request, id):
+    message = 'Không tìm thấy đường dẫn này'
     try:
         post = Post.objects.get(id = id)
     except Post.DoesNotExist:
-        raise Http404('Sorry, this post does not exist.')
+        raise Http404(message)
 
     return render(request, 'blogs/post.html', {'post': post})

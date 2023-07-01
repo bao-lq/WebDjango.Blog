@@ -8,8 +8,5 @@ def index(request):
 def about(request):
     return render(request, 'pages/about.html')
 
-def info(request):
-    return render(request, 'pages/info.html')
-
 def error(request, exception):
     return render(request, 'pages/error.html', {'message': exception})

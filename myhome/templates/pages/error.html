@@ -1,9 +1,16 @@
 {% extends 'pages/base.html' %}
+{% load static %}
 
 {% block title %}
     Error
 {% endblock %}
 
 {% block content %}
-    <h3 style="color: red;">{{message}}</h3>
+    <center>
+        <!-- <img src="{% static 'images/Icon-error.png' %}" alt="Icon 404"> -->
+        <h3 style="color: red;">{{message}}</h3>
+        <p>
+            Hãy quay lại <a href="{% url 'home' %}">trang chủ</a>
+        </p>
+    </center>
 {% endblock %}
