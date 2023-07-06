@@ -440,3 +440,8 @@ a.article-title:hover {
 .about-main {
   padding-left: 20px;
 }
+
+.blog-img {
+  display: flex;
+  align-items: center;
+}

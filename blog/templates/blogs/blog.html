@@ -5,15 +5,19 @@
 {% endblock %}
 
 {% block content %}
+    <!-- <a class="mr-2" href="#">{{ post.author }}</a> -->
+    <!-- {{post.date|date:"d-m-Y"}} -->
     {% for post in Posts %}
-        <!-- <h4>{{post.date|date:"d-m-Y"}} <a href="/blog/{{post.id}}">{{post.title}}</a></h4> -->
         <article class="media content-section">
             <div class="article-metadata">
-            <!-- <a class="mr-2" href="#">{{ post.author }}</a> -->
-            <small class="text-muted">{{ post.date }}</small>
+            <small class="text-muted">{{ post.date }}</small> 
             </div>
-            <h2><a class="article-title" href="/blog/{{post.id}}">{{ post.title }}</a></h2>
-            <!-- <p class="article-content">{{ post.content }}</p> -->
+            <div class="blog-img">
+                <h2><a class="article-title" href="/blog/{{post.id}}">{{ post.title }}</a></h2>
+                {% if post.image %}
+                        <img src="{{ post.image.url }}" width="100px" height="auto" style="margin-left: 20px;">
+                {% endif %}
+            </div>
         </article>
     {% endfor %}
 {% endblock %}
