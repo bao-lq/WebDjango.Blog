@@ -282,8 +282,17 @@ a {
   left: 0;
   width: 2px;
   height: 32px;
-  background-color: var(--white-color)
+  background-color: var(--white-color);
+  border-radius: 5px;
+  /* transform-origin: top;
+  transform: scaleX(0);
+  transition: transform .5s; */
 }
+
+/* .active:hover::before {
+  transform-origin: bottom;
+  transform: scaleX(1);
+} */
 
 .height-100 {
   min-height: 75vh;
@@ -444,4 +453,124 @@ a.article-title:hover {
 .blog-img {
   display: flex;
   align-items: center;
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: .75em;
+  padding-right: .75em;
+  }
+  .card-registration .select-arrow {
+  top: 13px;
+}
+
+/* --------------------------------------------- css register.html --------------------------------------------- */
+.gradient {
+  background-image: linear-gradient(to right, #cbc8c9, #d8d8da);
+  backdrop-filter: blur(50px);
+}
+
+.regist-content {
+  background-image: url('../images/Back-regist.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: last baseline;
+}
+
+.wrapper {
+  margin: 0px auto;
+  text-align: center;
+  position: relative;
+  min-width: 50%;
+  min-height: 280px;
+  background: transparent;
+  border: 2px solid rgb(255, 255, 255, 1);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-top: 250px;
+  margin-bottom: 25px;
+}
+
+.form-box {
+  width: 100%;
+  padding: 20px;
+}
+
+.form-box h2 {
+  font-weight: bold;
+}
+
+.input-box {
+  position: relative;
+  width: 95%;
+  height: 50px;
+  border-bottom: 2px solid rgba(0, 0, 0, 1);
+  margin: 20px 0px;
+}
+
+.input-box i {
+  position: absolute;
+  right: 8px;
+  line-height: 50px;
+}
+
+.input-box input {
+  width: 100%;
+  height: 50%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0px 35px 0px 5px;
+  font-size: 1em;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.input-box input:focus~.input-label,
+.input-box input:valid~.input-label {
+  top: 0px;
+}
+
+.input-box .input-label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  font-weight: 500;
+  pointer-events: none;
+  transition: .5s;
+  font-weight: 600;
+}
+
+.term {
+  font-size: smaller;
+  font-weight: 600;
+  margin: -15px 0px 15px;
+}
+
+.btn {
+  cursor: pointer;
+  width: 90%;
+  border: 2px solid rgba(255, 255, 255, .75);
+  background-color: rgba(0, 0, 0, .5);
+  color: rgba(255, 255, 255, 1);
+  font-weight: 600;
+  margin: 10px 20px;
+}
+
+.btn:hover {
+  background-color: rgba(0, 0, 0, .25);
+}
+
+.re-login {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
 }

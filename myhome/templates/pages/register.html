@@ -1,0 +1,54 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+<!-- <a href="{% url 'home' %}">home</a>  -->
+    <div class="gradient">
+        <div class="height-100 regist-content">
+            <div class="wrapper">
+                <div class="form-box login">
+                    <h2 style="pointer-events: none;">Register</h2>
+                    <form action="." method="post">
+                        {% csrf_token %}
+                        <ul style="list-style-type: none;">
+                            <li class="input-box">
+                                <i class='bx bxl-gmail nav-icon' ></i>
+                                {{ form.email }}
+                                <span class="input-label">{{ form.email.label }}</span>
+                            </li>
+                            <li class="input-box">
+                                <i class='bx bxs-user nav-icon' ></i>
+                                {{ form.username }}
+                                <span class="input-label">{{ form.username.label }}</span>
+                            </li>
+                            <li class="input-box">
+                                <i class='bx bxs-lock-alt nav-icon' ></i>
+                                {{ form.password1 }}
+                                <span class="input-label">{{ form.password1.label }}</span>
+                            </li>
+                            <li class="input-box">
+                                <i class='bx bx-subdirectory-left nav-icon'></i>
+                                {{ form.password2 }}
+                                <span class="input-label">{{ form.password2.label }}</span>
+                            </li>
+                        </ul>
+
+                        <div class="term">
+                            <label><input type="checkbox" name="term"> I agree to the terms and conditions</label>
+                        </div>
+
+                        <input type="submit" value="Register" class="btn"/>
+                        <div class="re-login">
+                            <p>
+                                Already have an account?
+                            </p>
+                            <a href="#">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
