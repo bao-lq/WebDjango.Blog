@@ -4,7 +4,6 @@
 {% block title %} Register {% endblock %}
 
 {% block content %}
-<!-- <a href="{% url 'home' %}">home</a>  -->
     <div class="gradient">
         <div class="height-100 regist-content">
             <div class="wrapper">
@@ -35,7 +34,7 @@
                             </li>
                         </ul>
 
-                        <div class="term">
+                        <div class="addition">
                             <label><input type="checkbox" name="term"> I agree to the terms and conditions</label>
                         </div>
 
@@ -44,7 +43,7 @@
                             <p>
                                 Already have an account?
                             </p>
-                            <a href="#">Login</a>
+                            <a href="{% url 'login' %}">Login</a>
                         </div>
                     </form>
                 </div>

@@ -29,9 +29,13 @@
             <div class="header_toggle"> 
                 <i class='bx bx-menu' id="header-toggle"></i> 
             </div>
-            <div class="header_img"> 
-                <img src="{% static 'images/Icon-title.png' %}" alt="icon_blog"> 
-            </div>
+            {% if user.username %}
+                <p>Welcome Back <span class="usname">{{ user.username }}</span></p>
+            {% else %}
+                <div class="header_img"> 
+                    <img src="{% static 'images/Icon-title.png' %}" alt="icon_blog">
+                </div>
+            {% endif %} 
         </header>
         <!-- end header  -->
 
@@ -76,15 +80,21 @@
                     </div>
                 </div> 
                 <div>
-                    <a href="{% url 'register' %}" class="nav_link"> 
-                        <i class='bx bx-user-plus nav_icon'></i> 
-                        <span class="nav_name">Create Account</span> 
-                    </a>
-
-                    <a href="#" class="nav_link"> 
-                        <i class='bx bx-log-in nav_icon'></i> 
-                        <span class="nav_name">Sign In</span> 
-                    </a>
+                    {% if user.username %}
+                        <a href="{% url 'logout' %}" class="nav_link"> 
+                            <i class='bx bx-log-out nav-icon'></i> 
+                            <span class="nav_name">Log Out</span> 
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="nav_link"> 
+                            <i class='bx bx-log-in nav_icon'></i> 
+                            <span class="nav_name">Log In</span> 
+                        </a>
+                        <a href="{% url 'register' %}" class="nav_link"> 
+                            <i class='bx bx-user-plus nav_icon'></i> 
+                            <span class="nav_name">Register</span> 
+                        </a>
+                    {% endif %}
                 </div>
             </nav>
             <!-- end left nav  -->

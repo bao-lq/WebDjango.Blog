@@ -1,0 +1,51 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class="gradient">
+        <div class="height-100 regist-content">
+            <div class="wrapper">
+                <div class="form-box">
+                    <h2 style="pointer-events: none;">Login</h2>
+                    <form action="." method="post">
+                    {% csrf_token %}
+                    {% for key, value in form.errors.items %}
+                        {{value}}
+                    {% endfor %}
+                    <!-- end error  -->
+
+                        <ul style="list-style-type: none;">
+                            <li class="input-box">
+                                <i class='bx bxs-user nav-icon' ></i>
+                                {{ form.username }}
+                                <span class="input-label">{{ form.username.label }}</span>
+                            </li>
+                            <li class="input-box">
+                                <i class='bx bxs-lock-alt nav-icon' ></i>
+                                {{ form.password }}
+                                <span class="input-label">{{ form.password.label }}</span>
+                            </li>
+                        </ul>
+
+                        <div class="addition add-login">
+                            <label><input type="checkbox" name="check">Remember me</label>
+                            <label><a href="#">Forgot your password?</a></label>
+                        </div>
+
+                        <input type="submit" value="Login" class="btn"/>
+                        <div class="re-login regist">
+                            <p>
+                                Do not have an account?
+                            </p>
+                            <a href="{% url 'register' %}">Register</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

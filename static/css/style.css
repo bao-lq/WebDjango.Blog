@@ -180,7 +180,17 @@ a {
 .header_toggle {
   color: var(--first-color);
   font-size: 1.5rem;
-  cursor: pointer
+  cursor: pointer;
+}
+
+.header .usname {
+  font-size: 2em;
+  font-weight: 700;
+  border: 2px solid rgba(0, 0, 0, .25);
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px rgba(122, 122, 122, .75);
+  padding: 0px 10px;
+  color: #4114f2;
 }
 
 .header_img {
@@ -415,10 +425,7 @@ a.article-title:hover {
 /* --------------------------------------------- css home.html --------------------------------------------- */
 
 .content-main {
-  background-size: contain;
-  background-position-x: right;
-  background-repeat: no-repeat;
-  background-image: url('../images/Back-blog.jpg');
+  display: flex;
 }
 
 .home-content {
@@ -465,7 +472,7 @@ a.article-title:hover {
   top: 13px;
 }
 
-/* --------------------------------------------- css register.html --------------------------------------------- */
+/* --------------------------------------------- css register.html + login.html --------------------------------------------- */
 .gradient {
   background-image: linear-gradient(to right, #cbc8c9, #d8d8da);
   backdrop-filter: blur(50px);
@@ -483,7 +490,7 @@ a.article-title:hover {
   margin: 0px auto;
   text-align: center;
   position: relative;
-  min-width: 50%;
+  width: 50%;
   min-height: 280px;
   background: transparent;
   border: 2px solid rgb(255, 255, 255, 1);
@@ -549,7 +556,7 @@ a.article-title:hover {
   font-weight: 600;
 }
 
-.term {
+.addition {
   display: flex;
   justify-content: center;
   font-size: smaller;
@@ -558,8 +565,14 @@ a.article-title:hover {
   text-align: center;
 }
 
-.term label {
+.addition label {
   display: flex;
+  align-items: center;
+}
+
+.add-login {
+  display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -577,8 +590,27 @@ a.article-title:hover {
   background-color: rgba(0, 0, 0, .25);
 }
 
+.errorlist {
+  width: 100%;
+  font-size: .85em;
+  font-weight: 500;
+  color: rgb(255, 42, 42);
+  list-style-type: none;
+}
+
 .re-login {
   margin-top: 10px;
   display: flex;
   justify-content: space-around;
+  font-weight: 600;
+}
+
+.re-login p {
+  pointer-events: none;
+}
+
+.regist {
+  justify-content: space-evenly;
+  width: 70%;
+  margin: 10px auto 0px;
 }
