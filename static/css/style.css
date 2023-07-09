@@ -550,9 +550,17 @@ a.article-title:hover {
 }
 
 .term {
+  display: flex;
+  justify-content: center;
   font-size: smaller;
   font-weight: 600;
-  margin: -15px 0px 15px;
+  margin: -5px 0px 15px;
+  text-align: center;
+}
+
+.term label {
+  display: flex;
+  align-items: center;
 }
 
 .btn {
