@@ -20,4 +20,8 @@
             </div>
         </article>
     {% endfor %}
+    <hr>
+    {% if page_obj.has_next %}
+        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next Page</a>
+    {% endif %}
 {% endblock %}

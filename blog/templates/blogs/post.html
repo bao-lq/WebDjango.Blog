@@ -8,6 +8,6 @@
     <p style="font-size: small;">{{post.date|date:"d-m-Y"}}</p>
     <center><h3><a href="{% url 'post' post.id %}"> {{post.title}}</a></h3></center>
     <h6>on {{post.date}} </h6>
-    <img src="{{post.image.url}}" width="500px" height="auto">
+    <img src="{{ post.image.url }}" width="500px" height="auto">
     <p class="article-content">{{post.body|safe|linebreaks}}</p>
 {% endblock %}

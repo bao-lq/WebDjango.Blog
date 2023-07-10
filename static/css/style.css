@@ -162,6 +162,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  pointer-events: none;
+}
+
 .header {
   width: 100%;
   height: var(--header-height);
