@@ -426,7 +426,7 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
-/* --------------------------------------------- css home.html --------------------------------------------- */
+/* ------------------------- css home.html + blog.html + post.html ------------------------------- */
 
 .content-main {
   display: flex;
@@ -442,6 +442,13 @@ a.article-title:hover {
   margin: 30px auto;
   max-width: 70%;
   text-align: center;
+}
+
+.home-banner {
+  flex: 1;
+  background-image: url('../images/Back-blog.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .highlight {
