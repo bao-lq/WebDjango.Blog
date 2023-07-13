@@ -483,6 +483,16 @@ a.article-title:hover {
   top: 13px;
 }
 
+.comment {
+  font-weight: 600;
+  font-size: 1.5em;
+  color: #2000a0;
+}
+
+.bl-content p {
+  pointer-events: all;
+}
+
 /* --------------------------------------------- css register.html + login.html --------------------------------------------- */
 .gradient {
   background-image: linear-gradient(to right, #cbc8c9, #d8d8da);

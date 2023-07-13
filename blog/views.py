@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from .models import Post
-from django.http import Http404
+from django.shortcuts import render, get_object_or_404
+from .models import Post, Comment
+from .forms import CommentForm
+from django.http import Http404, HttpResponseRedirect
 from django.views.generic import ListView, DetailView
+from django.conf import settings
 
 # Create your views here.
 
@@ -11,7 +13,7 @@ def list(request):
     return render(request, 'blogs/blog.html', Data)
 
 def post(request, id):
-    message = 'Không tìm thấy đường dẫn này'
+    message = 'This link could not be found'
     try:
         post = Post.objects.get(id = id)
     except Post.DoesNotExist:
@@ -27,20 +29,27 @@ class PostListView(ListView):
     context_object_name = 'Posts'
     paginate_by = 5
 
-class PostDetailView(DetailView):
-    model = Post
-    template_name = 'blogs/post.html'
+# generic view 
+# class PostDetailView(DetailView):
+#     model = Post
+#     template_name = 'blogs/post.html' 
 
-#     # urls.py
-# urlpatterns = [
-#     url(r'^user/(?P<pk>\d+)/$', UserDetailView.as_view(), name="user_view"),
-# ]
+def post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    form = CommentForm()
+    if request.method == "POST":
+        form = CommentForm(request.POST, author=request.user, post=post)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.path)
+    return render(request, "blogs/post.html", {'post': post, 'form':form})
 
-# # views.py
+    # use detail 
 # class UserDetailView(DetailView):
-#     model = User
+#     model = settings.AUTH_USER_MODEL
 
 #     def get_context_data(self):
 #         context = super().get_context_data()
 #         context['posts'] = self.object.posts.all()
 #         return context
+
