@@ -48,7 +48,7 @@
                     </a>
 
                     <div class="nav_list"> 
-                        <a href="{% url 'home' %}" class="nav_link active"> 
+                        <a href="{% url 'home' %}" class="nav_link"> 
                             <i class='bx bx-grid-alt nav_icon'></i> 
                             <span class="nav_name">Dashboard</span> 
                         </a>
@@ -57,13 +57,16 @@
                             <i class='bx bx-message-square-detail nav_icon'></i> 
                             <span class="nav_name">Posts</span> 
                         </a>
-                           
-                        <a href="#" class="nav_link"> 
+                        {% if user.username %}
+                            <a href="{% url 'profile' %}" class="nav_link"> 
+                        {% else %}
+                            <a href="{% url 'login' %}" class="nav_link"> 
+                        {% endif %}
                             <i class='bx bx-user nav_icon'></i> 
                             <span class="nav_name">Users</span> 
                         </a> 
                         
-                        <a href="#" class="nav_link"> 
+                        <a href="{% url 'newpost' %}" class="nav_link"> 
                             <i class='bx bx-message-add nav_icon'></i> 
                             <span class="nav_name">New Post</span> 
                         </a> 
@@ -105,9 +108,14 @@
             <div class="row">
                 <!-- main content  -->
                 <div class="col-md-8 bl-content">
-                    {% block content %}
-
-                    {% endblock %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% block content %} {% endblock %}
                 </div>
 
                 <!-- right side bar  -->

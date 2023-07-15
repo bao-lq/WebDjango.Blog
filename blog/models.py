@@ -4,6 +4,7 @@ from django.conf import settings
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=100)
+    # user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.PROTECT,)
     body = models.TextField()
     image = models.ImageField(null=True)
     date = models.DateTimeField(auto_now_add=True)

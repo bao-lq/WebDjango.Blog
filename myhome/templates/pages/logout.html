@@ -1,0 +1,23 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class="gradient">
+        <div class="height-100 regist-content">
+            <div class="wrapper lg-out">
+                <div class="lg-img">
+                    <img src="{% static 'images/Img-log_out.jpg' %}" alt="log out image" width="100%" height="auto">
+                </div>
+                <h4 style="pointer-events: none;">You have just been logged out!!</h4>
+                <div>
+                    <i class='bx bxs-hand-right'></i>
+                    <a href="{% url 'login' %}">Login Again</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

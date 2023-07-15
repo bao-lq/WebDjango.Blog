@@ -5,10 +5,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
         nav = document.getElementById(navId),
         bodypd = document.getElementById(bodyId),
         headerpd = document.getElementById(headerId)
+
+        // delay function
+        var delay = function (elem, callback) {
+            var timeout = null;
+            elem.onmouseover = function() {
+                // Set timeout to be a timer which will invoke callback after 1s
+                timeout = setTimeout(callback, 500);
+            };
+        
+            elem.onmouseout = function() {
+                // Clear any timers set to timeout
+                clearTimeout(timeout);
+            }
+        };
         
         // Validate that all variables exist
         if(toggle && nav && bodypd && headerpd){
-            toggle.addEventListener('click', ()=>{
+            toggle.addEventListener('mouseover', delay(toggle, function() {
                 // show navbar
                 nav.classList.toggle('show')
                 // change icon
@@ -17,7 +31,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 bodypd.classList.toggle('body-pd')
                 // add padding to header
                 headerpd.classList.toggle('body-pd')
-            })
+                })
+            )
         }
     }
     
@@ -32,7 +47,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
             this.classList.add('active')
         }
     }
-    linkColor.forEach(l=> l.addEventListener('click', colorLink))
-    
-     // Your code to run since DOM is loaded and ready
+    linkColor.forEach(l=> l.addEventListener("mouseover", colorLink))
 });
