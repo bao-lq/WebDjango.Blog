@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 from django.http import Http404, HttpResponseRedirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, edit
 from django.conf import settings
+from django.contrib import messages
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -34,18 +36,64 @@ class PostListView(ListView):           #------------------------------ class-ba
 
 def PostDetailView(request, pk):        #------------------------------ function-base view + comment form
     post = get_object_or_404(Post, pk=pk)
-    form = CommentForm()
     if request.method == "POST":
-        form = CommentForm(request.POST, author=request.user, post=post)
+        form = CommentForm(request.POST, request.FILES, author=request.user, post=post)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(request.path)
+    else:
+        form = CommentForm()
     return render(request, 'blogs/post.html', {'post': post, 'form':form})
 
-class PostCreateView(CreateView):
-    model = Post
-    template_name = 'blogs/newpost.html'
-    fields = '__all__'
+#new post 
+def create_post(request):
+    if request.method == 'GET':
+        context = {'form': PostForm()}
+        return render(request, 'blogs/new_post.html', context)
+    elif request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'The post has been created successfully.')
+            return redirect('blog')
+        else:
+            messages.error(request, 'Please correct the following errors:')
+            return render(request, 'blogs/new_post.html', {'form': form})
+
+#edit post
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == 'GET':
+        context = {'form': PostForm(instance=post), 'pk': pk}
+        return render(request, 'blogs/edit_post.html', context)
+
+    elif request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'The post has been updated successfully.')
+            return redirect('post', pk=pk)
+        else:
+            messages.error(request, 'Please correct the following errors:')
+            return render(request, 'blogs/edit_post.html', {'form': form})
+
+# dele post 
+def dele_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    context = {'form': post}    
+    
+    if request.method == 'GET':
+        return render(request, 'blogs/dele_post.html',context)
+
+    elif request.method == 'POST':
+        post.delete()
+        messages.success(request,  'The post has been deleted successfully.')
+        return redirect('blog')
+
+# ...
 
     # user detail 
 # class UserDetailView(DetailView):

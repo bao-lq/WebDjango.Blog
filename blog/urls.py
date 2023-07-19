@@ -20,7 +20,12 @@ urlpatterns = [
     path('<int:pk>/', views.PostDetailView, name='post'),       #----------------------- Normal view controller + Comment Form
 
     # Create new post
-    path('post/new/', views.PostCreateView.as_view(), name='newpost'),    #----------------------- Normal view controller
+    path('new/', views.create_post, name='new_post'),    #----------------------- Normal view controller
 
+    #edit post
+    path('post/<int:pk>/edit/', views.edit_post, name='edit_post'),
+
+    #dele post
+    path('post/<int:pk>/delete/', views.dele_post, name='dele_post'),
     # url(r'^user/(?P<pk>\d+)/$', UserDetailView.as_view(), name="user_view"),  #------- user detail
 ]

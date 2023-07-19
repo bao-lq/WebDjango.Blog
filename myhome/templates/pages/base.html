@@ -26,8 +26,9 @@
 <body id="body-pd">
     <div class="container-fluid">
         <header class="header" id="header">
+            <!-- icon menu  -->
             <div class="header_toggle"> 
-                <i class='bx bx-menu' id="header-toggle"></i> 
+                <!-- <i class='bx bx-menu' id="header-toggle"></i>  -->
             </div>
             {% if user.username %}
                 <p>Welcome Back <span class="usname">{{ user.username }}</span></p>
@@ -65,8 +66,11 @@
                             <i class='bx bx-user nav_icon'></i> 
                             <span class="nav_name">Users</span> 
                         </a> 
-                        
-                        <a href="{% url 'newpost' %}" class="nav_link"> 
+                        {% if user.username %}
+                            <a href="{% url 'new_post' %}" class="nav_link"> 
+                        {% else %}
+                            <a href="{% url 'login' %}" class="nav_link"> 
+                        {% endif %}
                             <i class='bx bx-message-add nav_icon'></i> 
                             <span class="nav_name">New Post</span> 
                         </a> 

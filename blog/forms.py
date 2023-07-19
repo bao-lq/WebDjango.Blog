@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment
+from .models import Comment, Post
 
 class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -16,3 +16,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ["body"]
+
+class PostForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+    class Meta:
+        model = Comment
+        fields = '__all__'
