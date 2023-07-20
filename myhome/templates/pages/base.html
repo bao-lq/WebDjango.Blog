@@ -30,7 +30,7 @@
             <div class="header_toggle"> 
                 <!-- <i class='bx bx-menu' id="header-toggle"></i>  -->
             </div>
-            {% if user.username %}
+            {% if user.is_authenticated %}
                 <p>Welcome Back <span class="usname">{{ user.username }}</span></p>
             {% else %}
                 <div class="header_img"> 

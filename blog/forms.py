@@ -21,5 +21,5 @@ class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
     class Meta:
-        model = Comment
+        model = Post
         fields = '__all__'

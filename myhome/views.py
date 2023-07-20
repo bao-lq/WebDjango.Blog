@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import RegistrationForm
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from django.views import generic
+from django.urls import reverse_lazy
 
 # Create your views here.
 def index(request):
@@ -23,8 +25,8 @@ def register(request):
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
             return HttpResponseRedirect('/')
-    return render(request, 'pages/register.html', {'form': form})
+    return render(request, 'accounts/register.html', {'form': form})
 
 @login_required
 def profile(request):
-    return render(request, 'pages/profile.html')
+    return render(request, 'accounts/profile.html')
