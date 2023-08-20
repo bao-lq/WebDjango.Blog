@@ -24,11 +24,11 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save() 
+            form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}.  You are now logged in!')
 
-            #login with created account
+            # login with created account
             new_user = auth.authenticate(username=username, password=form.cleaned_data['password1'],)
             auth.login(request, new_user)
             return HttpResponseRedirect('/profile')

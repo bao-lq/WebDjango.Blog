@@ -30,10 +30,11 @@ class RegistrationForm(forms.Form):
         raise forms.ValidationError('Username already exists')
 
     # create user 
-    def save(self):
-        User.objects.create_user(username=self.cleaned_data['username'], 
+    def save(self, *args, **kwargs):
+        User.objects.create_user(
+            username=self.cleaned_data['username'], 
             email=self.cleaned_data['email'], 
-            password=self.cleaned_data['password2']
+            password=self.cleaned_data['password2'],
         )
 
 class UserUpdateForm(forms.ModelForm):
