@@ -11,12 +11,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}"></script>
     <link rel="icon" type="img/png" href="{% static 'images/Icon-title.png' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
@@ -30,13 +27,17 @@
             <div class="header_toggle"> 
                 <!-- <i class='bx bx-menu' id="header-toggle"></i>  -->
             </div>
-            {% if user.is_authenticated %}
-                <p>Welcome Back <span class="usname">{{ user.username }}</span></p>
-            {% else %}
-                <div class="header_img"> 
-                    <img src="{% static 'images/Icon-title.png' %}" alt="icon_blog">
+        {% if user.is_authenticated %}
+            <div class="header_user">
+                <div>
+                    <p>Welcome</p>
+                    <span class="usname">{{ user.username }}</span>
                 </div>
-            {% endif %} 
+                <img class="header_img" src="{{ user.profile.image.url }}" alt="user_img">
+            </div>
+        {% else %}
+            <img class="header_img" src="{% static 'images/Icon-title.png' %}" alt="icon_blog">
+        {% endif %} 
         </header>
         <!-- end header  -->
 
@@ -58,19 +59,13 @@
                             <i class='bx bx-message-square-detail nav_icon'></i> 
                             <span class="nav_name">Posts</span> 
                         </a>
-                        {% if user.username %}
-                            <a href="{% url 'profile' %}" class="nav_link"> 
-                        {% else %}
-                            <a href="{% url 'login' %}" class="nav_link"> 
-                        {% endif %}
+                        
+                        <a href="{% url 'profile' %}" class="nav_link">
                             <i class='bx bx-user nav_icon'></i> 
-                            <span class="nav_name">Users</span> 
-                        </a> 
-                        {% if user.username %}
-                            <a href="{% url 'new_post' %}" class="nav_link"> 
-                        {% else %}
-                            <a href="{% url 'login' %}" class="nav_link"> 
-                        {% endif %}
+                            <span class="nav_name">Profile</span> 
+                        </a>
+                            
+                        <a href="{% url 'new_post' %}" class="nav_link">
                             <i class='bx bx-message-add nav_icon'></i> 
                             <span class="nav_name">New Post</span> 
                         </a> 
@@ -89,7 +84,7 @@
                 <div>
                     {% if user.username %}
                         <a href="{% url 'logout' %}" class="nav_link"> 
-                            <i class='bx bx-log-out nav-icon'></i> 
+                            <i class='bx bx-log-out nav_icon'></i> 
                             <span class="nav_name">Log Out</span> 
                         </a>
                     {% else %}

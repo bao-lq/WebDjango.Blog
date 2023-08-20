@@ -1,5 +1,6 @@
 from django import forms
 from .models import Comment, Post
+from django.contrib.auth.models import User
 
 class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -18,8 +19,13 @@ class CommentForm(forms.ModelForm):
         fields = ["body"]
 
 class PostForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
-        super(PostForm, self).__init__(*args, **kwargs)
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['author'].queryset = User.objects.filter(pk=user.pk)
+        
     class Meta:
         model = Post
         fields = '__all__'

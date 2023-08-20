@@ -1,0 +1,16 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+    Password change
+{% endblock title %}
+
+{% block content %}
+    <h1>Change My Password</h1>
+    <p>Please enter your current password, end then enter your new password twice</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Change my password">
+    </form>
+{% endblock content %}

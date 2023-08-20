@@ -7,15 +7,23 @@
 {% block content %}
     <p style="font-size: small;">{{post.date|date:"d-m-Y"}}</p>
     <center><h3>{{post.title}}</h3></center>
+
+    <!-- auther -->
+    <img class="rounded_circle" src="{{ post.author.profile.image.url }}">
+    <a href="{% url 'user_posts' post.author.username %}">{{ post.author.profile.user }}</a>
     <h6>on {{post.date}} </h6>
     {% if post.image %}
         <img src="{{ post.image.url }}" width="500px" height="auto">
     {% endif %}
     <p class="article-content">{{post.body|safe|linebreaks}}</p>
-    <!-- edit post  -->
-    <a href="{% url 'edit_post' post.pk %}">+ Edit This Post</a>
-    <!-- delete post  -->
-    <a href="{% url 'dele_post' post.pk %}">+ Delete This Post</a>
+
+    <!-- update post  -->
+    {% if post.author == user %}
+        <a href="{% url 'update_post' post.pk %}">+ Update This Post</a>
+
+        <!-- delete post  -->
+        <a href="{% url 'dele_post' post.pk %}">+ Delete This Post</a>
+    {% endif %}
     <hr>
 
     <!-- display comment  -->
@@ -32,7 +40,6 @@
             <form action="{% url 'post' post.id %}" method="POST">
                 {% csrf_token %}
                 {{form.body}}
-                <br/>
                 <input type="submit" value="Bình luận"/>
             </form>
         {% else %}
@@ -40,12 +47,14 @@
         {% endif %}
     {% else %}
         {% if user.username %}
-            <p>Be the first to comment</p>
-            {{form.body}}
-                <br/>
+            <form action="{% url 'post' post.id %}" method="POST">
+                {% csrf_token %}
+                <p>Be the first to comment</p>
+                {{form.body}}
                 <input type="submit" value="Bình luận"/>
+            </form>
         {% else %}
             <p><a href="{% url 'login' %}">Login</a> to post the first comment</p>
         {% endif %}
     {% endif %}
-{% endblock %}
+{% endblock content %}

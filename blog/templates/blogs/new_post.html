@@ -8,7 +8,33 @@
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}  
-        {{ form.as_p }}
-        <input type="submit" value="Save"/>
+        <div class="form-new">
+            <ul style="list-style: none;">
+                <li class="flex-container">
+                    <p>{{form.title.label}}</p>
+                    {{form.title}}
+                </li>
+
+                <li class="flex-container">
+                    <p>{{form.author.label}}</p>
+                    {{form.author}}
+                </li>
+
+                <script>
+                    $('#id_author').attr('disabled', 'disabled');
+                </script>
+
+                <li class="flex-container">
+                    <p>{{form.body.label}}</p>
+                    {{form.body}}
+                </li>
+
+                <li class="flex-container">
+                    <p>{{form.image.label}}</p>
+                    {{form.image}}
+                </li>
+            </ul>
+        </div>
+        <input class="btn" type="submit" value="Create Post"/>
     </form>
 {% endblock content %}

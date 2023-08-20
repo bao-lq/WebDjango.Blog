@@ -6,5 +6,70 @@
 {% endblock %}
 
 {% block content %}
-    this is block content
+    <div class="cover_img">
+        <img src="{% static 'images/Img-ha-long-bay.jpg' %}" alt="banner_img">
+    </div>
+
+    <div class="profile">
+        <div class="profile-info">
+                <div class="user-info">
+                    <img class="profile-img" src="{{ user.profile.image.url }}" alt="user_image">
+                    <ul>
+                        <li class="info-name">{{ user.username }}</li>
+                        <li><span class="follow">0</span> followers - <span class="follow">0</span> following</li>
+                    </ul>
+                </div>
+            
+            <div class="post-info">
+                <a href="{% url 'user_posts' user %}"><span>{{post}}</span> Posts</a>
+                <a href="{% url 'new_post' %}" class="post-btn">+ New Post</a>
+            </div>
+        </div>
+
+        <hr style="margin-bottom: 7px;">
+
+        <ul class="flex-container profile-nav">
+            <li><a href="{% url 'profile' %}">
+                    <i class='bx bx-info-circle'></i>
+                    Info
+                </a></li>
+            <li><a href="">
+                    <i class='bx bx-news' ></i>
+                    Posts
+                </a></li>
+            <li><a href="">
+                    <i class='bx bx-bookmarks' ></i>
+                    Bookmark
+                </a></li>
+            <li><a href="">
+                    <i class='bx bx-images' ></i>
+                    Media
+                </a></li>
+        </ul>
+
+        <form action="." method="post" enctype="multipart/form-data" style="text-align: center;">
+            {% csrf_token %}
+            <ul style="list-style-type: none;">
+                <li class="input-box">
+                    <i class='bx bx-camera nav-icon'></i>
+                    <input type="file" name="{{ p_form.image.name }}" id="{{p_form.image.id_for_label}}">
+                    <span class="input-label">Change Avatar</span>
+                </li>
+                
+                <li class="input-box">
+                    <i class='bx bxl-gmail nav-icon' ></i>
+                    {{ u_form.email }}
+                    <span class="input-label">{{ u_form.email.label }}</span>
+                </li>
+                <li class="input-box">
+                    <i class='bx bxs-user nav-icon' ></i>
+                    {{ u_form.username }}
+                    <span class="input-label">{{ u_form.username.label }}</span>
+                </li>
+            </ul>
+
+            <input type="submit" value="Update Profile" class="btn"/>
+            <a class="btn" href="{% url 'password_reset' %}">Reset Password</a>
+        </form>
+    </div>
 {% endblock %}

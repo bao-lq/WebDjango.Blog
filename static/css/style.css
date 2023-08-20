@@ -187,27 +187,28 @@ p {
   cursor: pointer;
 }
 
+.header_user {
+  display: flex;
+}
+
+.header_user>div {
+  text-align: center;
+  margin-right: 1em;
+}
+
+.header p {
+  margin: 0px;
+}
+
 .header .usname {
-  font-size: 2em;
-  font-weight: 700;
-  border: 2px solid rgba(0, 0, 0, .25);
-  border-radius: 50%;
-  box-shadow: 0px 0px 5px rgba(122, 122, 122, .75);
-  padding: 0px 10px;
   color: #4114f2;
 }
 
 .header_img {
-  width: 35px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
   border-radius: 50%;
-  overflow: hidden
-}
-
-.header_img img {
-  width: 40px
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
 }
 
 .l-navbar {
@@ -346,13 +347,14 @@ p {
   }
 }
 
-/* -----------------------------------main css----------------------------------- */
+/* -----------------------------------main css - base.html ----------------------------------- */
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
 ul {
   margin: 0;
+  list-style: none;
 }
 
 .bg-steel {
@@ -468,6 +470,16 @@ a.article-title:hover {
   padding-left: 20px;
 }
 
+.text-muted {
+  display: flex;
+  justify-content: space-between;
+}
+
+.author {
+  font-weight: 600;
+  color: #050059e0;
+}
+
 .blog-img {
   display: flex;
   align-items: center;
@@ -491,6 +503,16 @@ a.article-title:hover {
 
 .bl-content p {
   pointer-events: all;
+}
+
+.rounded_circle {
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+}
+
+.paginator {
+  justify-content: center;
 }
 
 /* -------------------------- css register.html + login.html + logou.html ------------------------- */
@@ -611,6 +633,30 @@ a.article-title:hover {
   background-color: rgba(0, 0, 0, .25);
 }
 
+.pag-btn {
+  display: inline-block;
+  width: 9em;
+  margin: 0;
+  font-size: smaller;
+  background-color: #428bcad8;
+}
+
+.pag-btn:hover {
+  background-color: #5a96ca8e;
+}
+
+.paginfo-btn {
+  display: inline-block;
+  width: max-content;
+  margin: 0;
+  color: #428bca;
+  background: none;
+}
+
+.paginfo-btn:hover {
+  background: none;
+}
+
 .errorlist {
   width: 100%;
   font-size: .85em;
@@ -648,4 +694,158 @@ a.article-title:hover {
   box-shadow: 0px 0px 5px rgba(15, 62, 46, 0.886);
   border: 2px solid rgba(174, 174, 174, 0.696) transparent;
   margin-bottom: 20px;
+}
+
+/* profile.html */
+.cover_img {
+  max-width: 100%;
+  height: 17em;
+}
+
+.cover_img img {
+  width: 100%;
+  height: auto;
+  border-radius: 1em;
+}
+
+.profile {
+  background-color: #e1deebde;
+  max-width: 95%;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 2em 2em 0 0;
+  padding: 1.5em;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-img {
+  border-radius: 50%;
+  box-shadow: 0 0 2px #565656c4;
+  width: 5em;
+  height: 5em;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+}
+
+.info-name {
+  font-weight: 500;
+  font-size: 1.5em;
+  color: #333333;
+}
+
+.follow {
+  font-weight: bolder;
+}
+
+.post-info {
+  display: flex;
+  align-items: center;
+}
+
+.post-info>a {
+  margin-right: 1em;
+}
+
+.post-info>a>span {
+  font-weight: bolder;
+}
+
+.post-btn {
+  border: none;
+  font-size: larger;
+  font-weight: 500;
+  color: white;
+  background-color: #1b75e4d0;
+  border-radius: 1em;
+  padding: 0.15em 0.3em;
+}
+
+.post-btn:hover {
+  color: rgb(230, 230, 230);
+  background-color: #1869cce2;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-nav {
+  justify-content: space-around;
+  margin: 0 4em;
+}
+
+.profile-nav a {
+  font-weight: 550;
+  color: #616161;
+}
+
+.profile-nav li:first-child a {
+  font-weight: 550;
+  color: #000000db;
+  border-top: 1px solid #000000db;
+  padding-top: 8px;
+}
+
+.profile-nav a:hover {
+  color: #000000db;
+  border-top: 1px solid #000000db;
+  padding-top: 8px;
+}
+
+/* new_post.html */
+.form-new {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-new ul {
+  width: 80%;
+}
+
+.form-new li {
+  margin: 2em 0;
+}
+
+.form-new li p {
+  display: inline-block;
+  width: 5em;
+  margin-right: 5px;
+}
+
+.form-new li select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  overflow:hidden;
+  border: none;
+  background: none;
+  font-size: larger;
+}
+
+.form-new li select:focus {
+  border: none;
+  outline: none;
+}
+
+.form-new input {
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #5b5b5be5;
+  border-radius: 3px;
+}
+
+.form-new textarea {
+  width: 100%;
 }

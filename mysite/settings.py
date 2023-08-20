@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myhome',       #'myhome.apps.MyhomeConfig'
     'blog',         #'blog.apps.BlogConfig'
+    # 'crispy_forms',
+    # 'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['myhome/templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'myhome/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,3 +138,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
+
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.environ.get('baolq.work@gmail.com') #baolq.work@gmail.com
+# EMAIL_HOST_PASSWORD = os.environ.get('nvbwogfthvuvxzdc') #nvbwogfthvuvxzdc
+EMAIL_HOST_USER = 'baolq.work@gmail.com'
+EMAIL_HOST_PASSWORD = 'nvbwogfthvuvxzdc'

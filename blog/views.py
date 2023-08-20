@@ -2,38 +2,32 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment
 from .forms import CommentForm, PostForm
 from django.http import Http404, HttpResponseRedirect
-from django.views.generic import ListView, DetailView, edit
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView, edit
 from django.conf import settings
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
-
-# Blog list 
-# function-base views
-# def list(request):                    #------------------------------ function-base view
-#     Data = {'Posts': Post.objects.all().order_by('-date')}
-#     return render(request, 'blogs/blog.html', Data)
-
 class PostListView(ListView):           #------------------------------ class-base view | Method_1
     queryset = Post.objects.all().order_by('-date')
     template_name = 'blogs/blog.html'
     context_object_name = 'Posts'
     paginate_by = 5
 
-# Post detail 
-# def post(request, id):                #------------------------------ function-base view
-#     message = 'This link could not be found'
-#     try:
-#         post = Post.objects.get(id = id)
-#     except Post.DoesNotExist:
-#         raise Http404(message)
-#     return render(request, 'blogs/post.html', {'post': post})
+class UserPostListView(ListView):       #------------------------------ class-base view | Method_1
+    model = Post
+    template_name = 'blogs/user_posts.html'
+    context_object_name = 'Posts'
+    paginate_by = 3
 
-# class PostDetailView(DetailView):     #------------------------------ class-base view
-#     model = Post
-#     template_name = 'blogs/post.html' 
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date')
 
+# Post detail
 def PostDetailView(request, pk):        #------------------------------ function-base view + comment form
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -45,14 +39,16 @@ def PostDetailView(request, pk):        #------------------------------ function
         form = CommentForm()
     return render(request, 'blogs/post.html', {'post': post, 'form':form})
 
-#new post 
+# Create/new post 
+@login_required
 def create_post(request):
     if request.method == 'GET':
-        context = {'form': PostForm()}
+        context = {'form': PostForm(user=request.user, initial={'author': request.user})}
         return render(request, 'blogs/new_post.html', context)
     elif request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
+            form.instance.author = request.user
             form.save()
             messages.success(
                 request, 'The post has been created successfully.')
@@ -61,37 +57,38 @@ def create_post(request):
             messages.error(request, 'Please correct the following errors:')
             return render(request, 'blogs/new_post.html', {'form': form})
 
-#edit post
-def edit_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+# Edit/update post
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+    model = Post
+    fields = '__all__'
+    template_name = 'blogs/update_post.html'
+    context_object_name = 'PostUpdate'
+    success_message = 'The post has been updated successfully.'
 
-    if request.method == 'GET':
-        context = {'form': PostForm(instance=post), 'pk': pk}
-        return render(request, 'blogs/edit_post.html', context)
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-    elif request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request, 'The post has been updated successfully.')
-            return redirect('post', pk=pk)
-        else:
-            messages.error(request, 'Please correct the following errors:')
-            return render(request, 'blogs/edit_post.html', {'form': form})
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
-# dele post 
-def dele_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    context = {'form': post}    
-    
-    if request.method == 'GET':
-        return render(request, 'blogs/dele_post.html',context)
+# Dele post
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+    model = Post
+    fields = '__all__'
+    template_name = 'blogs/dele_post.html'
+    context_object_name = 'PostDelete'
+    success_url = '/blog/'
+    success_message = 'The post has just been deleted.'
 
-    elif request.method == 'POST':
-        post.delete()
-        messages.success(request,  'The post has been deleted successfully.')
-        return redirect('blog')
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 # ...
 

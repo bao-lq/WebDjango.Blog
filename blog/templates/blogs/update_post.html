@@ -1,0 +1,40 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+    Update Post
+{% endblock title %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}  
+    <div class="form-new">
+        <ul style="list-style: none;">
+            <li class="flex-container">
+                <p>{{form.title.label}}</p>
+                {{form.title}}
+            </li>
+
+            <li class="flex-container">
+                <p>{{form.author.label}}</p>
+                {{form.author}}
+            </li>
+
+            <script>
+                $('#id_author').attr('disabled', 'disabled');
+            </script>
+
+            <li class="flex-container">
+                <p>{{form.body.label}}</p>
+                {{form.body}}
+            </li>
+
+            <li class="flex-container">
+                <p>{{form.image.label}}</p>
+                {{form.image}}
+            </li>
+        </ul>
+    </div>
+    <input class="btn" type="submit" value="Update"/>
+</form>
+{% endblock content %}

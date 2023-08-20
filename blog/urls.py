@@ -1,31 +1,24 @@
 from django.urls import path
-from .models import Post
 from . import views
 from django.views.generic import ListView
 
 urlpatterns = [
     # Blog list view
-    # path('', views.list, name='blog'),                        #----------------------- Normal view controller
-    # path('', views.PostListView.as_view(), name='blog'),      #----------------------- Generic view controller | Method_1
-    path('', ListView.as_view(                                  #----------------------- Generic view controller | Method_2
-        queryset = Post.objects.all().order_by('-date'),
-        template_name = 'blogs/blog.html',
-        context_object_name = 'Posts',
-        paginate_by = 5
-        ), name='blog'),
+    path('', views.PostListView.as_view(), name='blog'),      #----------------------- Generic view controller | Method_1
+
+    # User post view
+    path('user/<str:username>/', views.UserPostListView.as_view(), name='user_posts'),
 
     # Post detail view
-    # path('<int:id>/', views.post, name='post'),               #----------------------- Normal view controller
-    # path('<int:pk>/', views.PostDetailView.as_view(), name='post'),   #--------------- Generic view controller
-    path('<int:pk>/', views.PostDetailView, name='post'),       #----------------------- Normal view controller + Comment Form
+    path('post/<int:pk>/', views.PostDetailView, name='post'),       #----------------------- Normal view controller + Comment Form
 
     # Create new post
-    path('new/', views.create_post, name='new_post'),    #----------------------- Normal view controller
+    path('post/new/', views.create_post, name='new_post'),    #----------------------- Normal view controller
 
-    #edit post
-    path('post/<int:pk>/edit/', views.edit_post, name='edit_post'),
+    # Edit post
+    path('post/<int:pk>/update/', views.PostUpdateView.as_view(), name='update_post'),
 
-    #dele post
-    path('post/<int:pk>/delete/', views.dele_post, name='dele_post'),
+    # Delete post
+    path('post/<int:pk>/delete/', views.PostDeleteView.as_view(), name='dele_post'),
     # url(r'^user/(?P<pk>\d+)/$', UserDetailView.as_view(), name="user_view"),  #------- user detail
 ]

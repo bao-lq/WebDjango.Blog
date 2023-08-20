@@ -2,13 +2,16 @@
 {% load static %}
 
 {% block title %}
-    Edit Post
+    Delete Post
 {% endblock title %}
 
 {% block content %}
-    <form action="" method="post">
+    <form action="" method="POST">
         {% csrf_token %}
-        <p>Are you sure to delete "{{ form.title }}" </p>
+        <p>Are you sure to delete "{{ object.title }}" </p>
         <input type="submit" value="Comfirm"/>
+    </form>
+    <form action="/blog/post/{{object.id}}">
+        <input type="submit" value="Cancel"/>
     </form>
 {% endblock content %}

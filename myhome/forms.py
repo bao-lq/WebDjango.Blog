@@ -1,6 +1,7 @@
 from django import forms
 import re
 from django.contrib.auth.models import User
+from .models import Profile
 
 class RegistrationForm(forms.Form):
     email = forms.EmailField(label = 'Email')
@@ -30,4 +31,17 @@ class RegistrationForm(forms.Form):
 
     # create user 
     def save(self):
-        User.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password2'])
+        User.objects.create_user(username=self.cleaned_data['username'], 
+            email=self.cleaned_data['email'], 
+            password=self.cleaned_data['password2']
+        )
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
