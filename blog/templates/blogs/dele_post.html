@@ -8,10 +8,10 @@
 {% block content %}
     <form action="" method="POST">
         {% csrf_token %}
-        <p>Are you sure to delete "{{ object.title }}" </p>
-        <input type="submit" value="Comfirm"/>
+        <p class="alert alert-info">Are you sure to delete "{{ object.title }}" </p>
+        <input class="btn pag-btn" type="submit" value="Comfirm"/>
     </form>
     <form action="/blog/post/{{object.id}}">
-        <input type="submit" value="Cancel"/>
+        <input class="btn pag-btn" type="submit" value="Cancel"/>
     </form>
 {% endblock content %}

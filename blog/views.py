@@ -89,14 +89,3 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         if self.request.user == post.author:
             return True
         return False
-
-# ...
-
-    # user detail 
-# class UserDetailView(DetailView):
-#     model = settings.AUTH_USER_MODEL
-
-#     def get_context_data(self):
-#         context = super().get_context_data()
-#         context['posts'] = self.object.posts.all()
-#         return context

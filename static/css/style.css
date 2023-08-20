@@ -696,6 +696,24 @@ a.article-title:hover {
   margin-bottom: 20px;
 }
 
+.login form {
+  text-align: left;
+}
+
+.login form p label {
+  display: block;
+}
+
+.login form p input {
+  width: 100%;
+  outline: none;
+  padding: 5px;
+}
+
+.login form ul {
+  font-size: smaller;
+}
+
 /* profile.html */
 .cover_img {
   max-width: 100%;

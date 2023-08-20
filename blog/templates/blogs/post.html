@@ -40,7 +40,8 @@
             <form action="{% url 'post' post.id %}" method="POST">
                 {% csrf_token %}
                 {{form.body}}
-                <input type="submit" value="Bình luận"/>
+                <br>
+                <input class="btn pag-btn" type="submit" value="Bình luận"/>
             </form>
         {% else %}
             <p><a href="{% url 'login' %}">Login</a> to post a comment</p>
@@ -51,7 +52,8 @@
                 {% csrf_token %}
                 <p>Be the first to comment</p>
                 {{form.body}}
-                <input type="submit" value="Bình luận"/>
+                <br>
+                <input class="btn pag-btn" type="submit" value="Bình luận"/>
             </form>
         {% else %}
             <p><a href="{% url 'login' %}">Login</a> to post the first comment</p>
